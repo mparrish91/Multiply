@@ -9,10 +9,11 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet UITextField *numberTextField;
-@property (strong, nonatomic) IBOutlet UILabel *multiplierLabel;
-@property (strong, nonatomic) IBOutlet UILabel *answerLabel;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *operatorSegmentControl;
+@property (weak, nonatomic) IBOutlet UITextField *numberTextField;
+@property (weak, nonatomic) IBOutlet UILabel *multiplierLabel;
+@property (weak, nonatomic) IBOutlet UILabel *answerLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *operatorSegmentControl;
+@property (weak, nonatomic) IBOutlet UISlider *numberSlider;
 
 @end
 
@@ -23,6 +24,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    //pass slider value to multiplierLabel each time view loads
+    int value = self.numberSlider.value;
+    NSString *stringValue = [NSNumber numberWithInt:value].description;
+    self.multiplierLabel.text = stringValue;
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,46 +38,48 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onCalculateButtonPressed:(UIButton *)sender {
-    int finalNumber;
+    
+    int result;
     
     int localNumber = [self.numberTextField.text intValue];
-    int localNumberTwo = [self.multiplierLabel.text intValue];
+    int localNumberTwo = self.numberSlider.value;
     if (self.operatorSegmentControl.selectedSegmentIndex == 0) {
-        int finalNumber = localNumber * localNumberTwo;
-        self.answerLabel.text = [NSString stringWithFormat:@"%d",finalNumber];
+        int result = localNumber * localNumberTwo;
+        self.answerLabel.text = [NSString stringWithFormat:@"%d",result];
 
     }else{
-        int finalNumber = localNumber / localNumberTwo;
-        self.answerLabel.text = [NSString stringWithFormat:@"%d",finalNumber];
+        int result = localNumber / localNumberTwo;
+        self.answerLabel.text = [NSString stringWithFormat:@"%d",result];
     }
     
-    if (finalNumber >= 20) {
+    if (result >= 20) {
         self.view.backgroundColor = [UIColor greenColor];
     }else{
         self.view.backgroundColor = [UIColor whiteColor];
     }
 
-    if(finalNumber % 3 == 0 && finalNumber % 5 == 0) {
+    if(result % 3 == 0 && result % 5 == 0) {
         self.answerLabel.text = @"fizzbuzz";
-    }else if (finalNumber % 3 == 0) {
+    }else if (result % 3 == 0) {
         self.answerLabel.text = @"fizz";
-    }else if (finalNumber % 5 == 0) {
+    }else if (result % 5 == 0) {
         self.answerLabel.text = @"buzz";
-    }else{
-        self.answerLabel.text = [NSString stringWithFormat:@"%d",finalNumber];
     }
     
-    [self.numberTextField resignFirstResponder];
-    
+//    [self.view endEditing:YES];
 }
 
-- (IBAction)onMultiplierSlider:(UISlider *)sender {
-    int round = roundf(sender.value);
-    if (round >=0 || round <=10) {
-        self.multiplierLabel.text = [NSString stringWithFormat:@"%d", round];
-    }
-    
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.numberTextField endEditing:YES];
 }
+
+- (IBAction)sliderValueChanged:(id *)sender {
+    int value = self.numberSlider.value;
+    NSString *stringValue = [NSNumber numberWithInt:value].description;
+    self.multiplierLabel.text = stringValue;
+}
+    
+
 
 
 @end
