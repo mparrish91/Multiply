@@ -66,7 +66,7 @@
         self.answerLabel.text = @"buzz";
     }
     
-//    [self.view endEditing:YES];
+    [self.view endEditing:YES];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
