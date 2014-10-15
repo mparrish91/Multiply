@@ -79,9 +79,6 @@
                                 <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="49" y="57" width="97" height="30"/>
                                 </variation>
-                                <connections>
-                                    <action selector="numberTextField:" destination="DNh-tV-6yG" eventType="editingDidEnd" id="haq-ab-7UG"/>
-                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYH-r5-ljU">
                                 <rect key="frame" x="268" y="285" width="65" height="30"/>
@@ -115,6 +112,9 @@
                                     <constraint firstAttribute="width" constant="114" id="L5e-sJ-9MR"/>
                                     <constraint firstAttribute="height" constant="30" id="m0w-q3-4DQ"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="DNh-tV-6yG" eventType="valueChanged" id="7LJ-Io-5Xa"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -139,7 +139,6 @@
                         <outlet property="answerLabel" destination="k9o-o9-wF1" id="bG5-SP-K9E"/>
                         <outlet property="multiplierLabel" destination="Dvo-Ng-F6F" id="IoK-Fl-4Ba"/>
                         <outlet property="numberSlider" destination="dMb-8n-BBO" id="koE-LK-wkR"/>
-                        <outlet property="numberTextField" destination="JZO-nu-fE9" id="g6y-CE-plw"/>
                         <outlet property="operatorSegmentControl" destination="Krm-J9-J6x" id="79o-kx-Kwh"/>
                     </connections>
                 </viewController>

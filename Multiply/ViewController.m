@@ -78,7 +78,7 @@
     NSString *stringValue = [NSNumber numberWithInt:value].description;
     self.multiplierLabel.text = stringValue;
 }
-    
+
 
 
 
